@@ -4,7 +4,8 @@ import "package:flutter/material.dart";
 // ignore: must_be_immutable
 class ShoeTile extends StatelessWidget {
   Shoe shoe;
-  ShoeTile({super.key, required this.shoe});
+  void Function()? onTap;
+  ShoeTile({super.key, required this.shoe, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,13 @@ class ShoeTile extends StatelessWidget {
             borderRadius: BorderRadius.circular(12.0),
             child: Image.asset(shoe.imagePath),
           ),
-          Text(shoe.description, style: TextStyle(color: Colors.grey[600])),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 25.0),
+            child: Text(
+              shoe.description,
+              style: TextStyle(color: Colors.grey[600]),
+            ),
+          ),
           Padding(
             padding: EdgeInsets.only(left: 25),
             child: Row(
@@ -46,16 +53,19 @@ class ShoeTile extends StatelessWidget {
                     ),
                   ],
                 ),
-                Container(
-                  padding: EdgeInsets.all(20),
-                  decoration: BoxDecoration(
-                    color: Colors.black,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(12.0),
-                      bottomRight: Radius.circular(12.0),
+                GestureDetector(
+                  onTap: onTap,
+                  child: Container(
+                    padding: EdgeInsets.all(20),
+                    decoration: BoxDecoration(
+                      color: Colors.black,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(12.0),
+                        bottomRight: Radius.circular(12.0),
+                      ),
                     ),
+                    child: Icon(Icons.add, color: Colors.white),
                   ),
-                  child: Icon(Icons.add, color: Colors.white),
                 ),
               ],
             ),
